@@ -1,0 +1,98 @@
+/* css/style.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #c3f0f7, #fce4ec);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  .app-title {
+    font-size: 2rem;
+    text-align: center;
+    color: #0077b6;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-title {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-form input {
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .auth-form button {
+    padding: 10px;
+    background: #00b4d8;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .auth-form button:hover {
+    background: #0077b6;
+  }
+  
+  .redirect-text {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+  
+  .redirect-text a {
+    color: #0077b6;
+    text-decoration: none;
+  }
+  
+  .redirect-text a:hover {
+    text-decoration: underline;
+  }
+  
+
+  .auth-form input,
+  .auth-form select {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s;
+  }
+
+  .auth-form input:focus,
+  .auth-form select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 6px #007bff;
+  }
+

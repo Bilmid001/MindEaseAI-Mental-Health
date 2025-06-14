@@ -1,0 +1,16 @@
+{
+  "name": "mindease-backend",
+  "version": "1.0.0",
+  "description": "Backend server for MindEase mental health companion app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  }
+}
+

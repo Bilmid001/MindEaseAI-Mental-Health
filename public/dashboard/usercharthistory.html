@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MindEase - View Chat History</title>
+  <link rel="icon" href="/public/img/brainlogo.jpg" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  />
+  <style>
+    body {
+      background: #f8f9fa;
+      padding: 2rem;
+    }
+    .chat-history {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background: #fafafa;
+    }
+    .message {
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      max-width: 75%;
+      position: relative;
+      word-wrap: break-word;
+    }
+    .message.user {
+      background-color: #007bff;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+    .message.ai {
+      background-color: #e9ecef;
+      color: #333;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+    .message-time {
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 0.25rem;
+      text-align: right;
+    }
+    .search-bar {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-history">
+    <h2 class="mb-4 text-center">Chat History</h2>
+
+    <input
+      type="text"
+      id="searchInput"
+      class="form-control search-bar"
+      placeholder="Search messages..."
+      autocomplete="off"
+    />
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="d-flex justify-content-between">
+      <button id="clearBtn" class="btn btn-danger">Clear History</button>
+      <a href="user.html" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    // Retrieve chat history from localStorage (assumed saved as array of objects)
+    // Each message: { text: string, sender: 'user'|'ai', timestamp: number }
+    const chatMessagesEl = document.getElementById('chatMessages');
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearBtn');
+
+    function loadChatHistory() {
+      let history = JSON.parse(localStorage.getItem('mindEaseChatHistory')) || [];
+      return history;
+    }
+
+    function formatTimestamp(ts) {
+      const date = new Date(ts);
+      return date.toLocaleString();
+    }
+
+    function renderMessages(filter = '') {
+      const history = loadChatHistory();
+      chatMessagesEl.innerHTML = '';
+
+      const filtered = history.filter(msg =>
+        msg.text.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      if (filtered.length === 0) {
+        chatMessagesEl.innerHTML = '<p class="text-muted text-center">No chat messages found.</p>';
+        return;
+      }
+
+      filtered.forEach(({ text, sender, timestamp }) => {
+        const msgEl = document.createElement('div');
+        msgEl.classList.add('message', sender);
+        msgEl.textContent = text;
+
+        const timeEl = document.createElement('div');
+        timeEl.classList.add('message-time');
+        timeEl.textContent = formatTimestamp(timestamp);
+
+        msgEl.appendChild(timeEl);
+        chatMessagesEl.appendChild(msgEl);
+      });
+
+      chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+    }
+
+    function clearHistory() {
+      if (confirm('Are you sure you want to clear your chat history?')) {
+        localStorage.removeItem('mindEaseChatHistory');
+        renderMessages();
+      }
+    }
+
+    // Search handler
+    searchInput.addEventListener('input', () => {
+      renderMessages(searchInput.value);
+    });
+
+    clearBtn.addEventListener('click', clearHistory);
+
+    // Initial render
+    renderMessages();
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+    :root {
+      --muted: hsl(60, 4.8%, 95.9%);
+      --muted-foreground: hsl(25, 5.3%, 44.7%);
+      --popover: hsl(0, 0%, 100%);
+      --popover-foreground: hsl(20, 14.3%, 4.1%);
+      --card: hsl(0, 0%, 100%);
+      --card-foreground: hsl(20, 14.3%, 4.1%);
+      --border: hsl(20, 5.9%, 90%);
+      --primary: hsl(224, 71.4%, 56.1%);
+      --primary-foreground: hsl(210, 20%, 98%);
+      --secondary: hsl(142, 76%, 36%);
+      --secondary-foreground: hsl(138, 76%, 97%);
+      --accent: hsl(37, 92%, 50%);
+      --accent-foreground: hsl(26, 83%, 14%);
+    }
+
+    body {
+      background: linear-gradient(to right, var(--muted), rgb(223, 239, 240));
+      color: var(--popover-foreground);
+      font-family: Arial, sans-serif;
+    }
+
+    section {
+      padding: 4rem 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      border: none;
+      color: var(--primary-foreground);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: var(--secondary-foreground);
+    }
+
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: bold;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 1rem auto;
+      color: var(--muted-foreground);
+    }
+
+    
+    .card-feature {
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      background-color: var(--card);
+      color: var(--card-foreground);
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card-feature:hover {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    
+    .card-feature svg {
+        width: 50px;
+        height: 50px;
+        padding: 12px;
+        border-radius: 20%;
+        border: 2px solid transparent;
+        color: white; /* All icons white */
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+      }
+      
+      /* Optional hover scale */
+      .card-feature:hover svg {
+        transform: scale(1.1);
+      }
+      
+      /* FIX: Apply colors by targeting the .col parent of each card */
+      .col:nth-child(1) .card-feature svg {
+        background-color: var(--primary); /* Blue */
+      }
+      
+      .col:nth-child(2) .card-feature svg {
+        background-color: var(--secondary); /* Green */
+      }
+      
+      .col:nth-child(3) .card-feature svg {
+        background-color: rgb(165, 31, 165); /* Orange/Yellow */
+      }
+      
+      .col:nth-child(4) .card-feature svg {
+        background-color: var(--accent); /* Teal */
+      }
+      
+
+      .container .cta-card{
+        padding: 50px;
+      }
+      .cta-card {
+        background: linear-gradient(to right, #3c86da 0%, white 100%);
+        border-radius: 20px;
+        padding: 10px;
+        text-align: center;
+      }
+      
+      .cta-card h1{
+        font-size: 45px;
+        color: white;
+      }
+
+      .cta-card p{
+        font-size: 20px;
+        color: white;
+      }
+
+    footer {
+      background-color: var(--popover);
+      padding: 1rem;
+      text-align: center;
+      color: var(--muted-foreground);
+    }

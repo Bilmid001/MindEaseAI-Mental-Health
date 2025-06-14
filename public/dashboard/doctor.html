@@ -1,0 +1,175 @@
+<!-- dashboard/doctor.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Doctor Dashboard - MindEase</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="/public/img/brainlogo.jpg" type="image/x-icon">
+  <style>
+    /* Minimal inline styles to improve look */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      margin: 0; 
+      padding: 0;
+      color: #333;
+    }
+    .dashboard-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      user-select: none;
+    }
+    button#logout {
+      background-color: #ef4444;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin-left: 50px;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button#logout:hover {
+      background-color: #dc2626;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #patientsList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #eef2ff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+      font-weight: 600;
+      text-align: center;
+      user-select: none;
+    }
+    textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      resize: vertical;
+      box-sizing: border-box;
+      width: 100%;
+      transition: border-color 0.3s ease;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 5px #3b82f6aa;
+    }
+    button#submitFeedback {
+      margin-top: 0.75rem;
+      background-color: #3b82f6;
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button#submitFeedback:hover {
+      background-color: #2563eb;
+    }
+    .feedback-message {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #16a34a;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header>
+      <h1>👨Doctor Dashboard</h1>
+      <button id="logout" aria-label="Logout from dashboard">Logout</button>
+    </header>
+
+    <section aria-labelledby="patientsOverviewHeading">
+      <h2 id="patientsOverviewHeading">Patients Overview</h2>
+      <div id="patientsList" role="list" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="reportsFeedbackHeading">
+      <h2 id="reportsFeedbackHeading">Reports & Feedback</h2>
+      <textarea id="feedbackText" placeholder="Write feedback or suggestions for a patient..." rows="5" aria-label="Write feedback or suggestions"></textarea>
+      <button id="submitFeedback" aria-live="polite">Submit</button>
+      <div id="feedbackMessage" class="feedback-message" aria-live="assertive" role="alert" style="display:none;"></div>
+    </section>
+  </div>
+
+  <script>
+    // Logout button handler
+    document.getElementById("logout").onclick = () => {
+      localStorage.removeItem("currentUser");
+      window.location.href = "../landingpage.html";
+    };
+
+    // Dummy patient list data
+    const patients = ["User123", "HopefulHeart", "CalmMind"];
+    const patientsListEl = document.getElementById("patientsList");
+    patientsListEl.innerHTML = patients
+      .map(p => `<div class='card' role="listitem" tabindex="0">👤 ${p}</div>`)
+      .join('');
+
+    // Feedback form functionality
+    const feedbackText = document.getElementById("feedbackText");
+    const submitBtn = document.getElementById("submitFeedback");
+    const feedbackMessage = document.getElementById("feedbackMessage");
+
+    submitBtn.addEventListener("click", () => {
+      const feedback = feedbackText.value.trim();
+      if (!feedback) {
+        feedbackMessage.style.color = "#dc2626"; // red for error
+        feedbackMessage.textContent = "Please enter feedback before submitting.";
+        feedbackMessage.style.display = "block";
+        return;
+      }
+
+      // Simulate sending feedback (replace with real API call)
+      setTimeout(() => {
+        feedbackMessage.style.color = "#16a34a"; // green for success
+        feedbackMessage.textContent = "Feedback submitted successfully!";
+        feedbackMessage.style.display = "block";
+        feedbackText.value = "";
+      }, 500);
+    });
+  </script>
+</body>
+</html>
